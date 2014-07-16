@@ -13,6 +13,11 @@ Copiar las directivas de directorio
 		Allow from all
 	</Directory>
 	
+Activar el include de VirtualHost
+
+	# Virtual hosts
+	Include conf/extra/httpd-vhosts.conf
+	
 ### Abrir archivo /apache/conf/extra/httpd-vhost.conf
 
 	<VirtualHost *:80>
@@ -34,3 +39,6 @@ Copiar las directivas de directorio
 	Agregar el domain
 	127.0.0.1  localhost
 	127.0.0.1  domain.local
+	
+### Reiniciar Apache
+
