@@ -4,6 +4,7 @@ $data = file_get_contents('usuarios.txt');
 
 $data = explode("\n", $data);
 
+echo "<a href=\"form.php\">Insert</a>";
 echo "<table border=1>";
 
 echo "<tr>";
@@ -21,7 +22,7 @@ echo "<th>photo</th>";
 echo "<th>Options</th>";
 echo "</tr>";
 
-foreach ($data as $rows)
+foreach ($data as $key => $rows)
 {
 	echo "<tr>";
 		$row=explode('|',$rows);
@@ -32,7 +33,7 @@ foreach ($data as $rows)
 				echo "</td>";
 			}
 		echo "<td>";
-			echo "<a href=\"#\">Update</a>";
+			echo "<a href=\"update.php?pos=".$key."\">Update</a>";
 			echo " | ";
 			echo "<a href=\"#\">Delete</a>";	
 		echo "</td>";
