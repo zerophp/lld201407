@@ -4,13 +4,13 @@
 
 ### Abrir archivo /apache/conf/httdp.conf
 
-   Copiar las directivas de directorio
+Copiar las directivas de directorio
    
-   <Directory "C:\www">
-    		Options Indexes FollowSymLinks
-    		AllowOverride All
-    		Order allow,deny
-    		Allow from all
+	<Directory "C:\www">
+		Options Indexes FollowSymLinks
+		AllowOverride All
+		Order allow,deny
+		Allow from all
 	</Directory>
 	
 ### Abrir archivo /apache/conf/extra/httpd-vhost.conf
