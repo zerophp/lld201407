@@ -63,16 +63,16 @@ echo "</pre>";
 	<li>
 		Pets: 
 		<select multiple name="pets[]">
-			<option value="Dog" <?=(in_array('Dog',$user[7]))?"selected":'';?>>Perro</option>
-			<option value="Tiger" <?=(in_array('Tiger',$user[7]))?"selected":'';?>>Tigre</option>
-			<option value="Cat" <?=(in_array('Cat',$user[7]))?"selected":'';?>>Gato</option>
+			<option value="Dog" <?=(isset($user[7])&&in_array('Dog',$user[7]))?"selected":'';?>>Perro</option>
+			<option value="Tiger" <?=(isset($user[7])&&in_array('Tiger',$user[7]))?"selected":'';?>>Tigre</option>
+			<option value="Cat" <?=(isset($user[7])&&in_array('Cat',$user[7]))?"selected":'';?>>Gato</option>
 		</select>
 	</li>
 	<li>
 		Languages: 
-		English <input type="checkbox" name="languages[]" value="en" <?=(in_array('en',$user[8]))?"checked":'';?>/>
-		Catal� <input type="checkbox" name="languages[]" value="ca" <?=(in_array('ca',$user[8]))?"checked":'';?>/>
-		Castellano <input type="checkbox" name="languages[]" value="es" <?=(in_array('es',$user[8]))?"checked":'';?>/>		
+		English <input type="checkbox" name="languages[]" value="en" <?=(isset($user[8])&&in_array('en',$user[8]))?"checked":'';?>/>
+		Catal� <input type="checkbox" name="languages[]" value="ca" <?=(isset($user[8])&&in_array('ca',$user[8]))?"checked":'';?>/>
+		Castellano <input type="checkbox" name="languages[]" value="es" <?=(isset($user[8])&&in_array('es',$user[8]))?"checked":'';?>/>		
 	</li>	
 	<li>
 		Enviar: <input type="submit" name="enviar" value="Enviar"/>

@@ -35,7 +35,7 @@ foreach ($data as $key => $rows)
 		echo "<td>";
 			echo "<a href=\"update.php?pos=".$key."\">Update</a>";
 			echo " | ";
-			echo "<a href=\"#\">Delete</a>";	
+			echo "<a href=\"delete.php?pos=".$key."\">Delete</a>";	
 		echo "</td>";
 	echo "</tr>";
 }
