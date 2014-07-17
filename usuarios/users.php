@@ -1,43 +1,55 @@
 <?php
 
-$data = file_get_contents('usuarios.txt');
+require_once ('models/insertUserIntoFile.php');
+require_once ('models/updateUserIntoFile.php');
+require_once ('models/deleteUserIntoFile.php');
 
-$data = explode("\n", $data);
+if(isset($_GET['action']))
+	$action=$_GET['action'];
+else
+	$action = 'select';
 
-echo "<a href=\"form.php\">Insert</a>";
-echo "<table border=1>";
-
-echo "<tr>";
-echo "<th>id</th>";
-echo "<th>name</th>";
-echo "<th>email</th>";
-echo "<th>password</th>";
-echo "<th>description</th>";
-echo "<th>city</th>";
-echo "<th>gender</th>";
-echo "<th>pets</th>";
-echo "<th>languages</th>";
-echo "<th>submit</th>";
-echo "<th>photo</th>";
-echo "<th>Options</th>";
-echo "</tr>";
-
-foreach ($data as $key => $rows)
+switch ($action)
 {
-	echo "<tr>";
-		$row=explode('|',$rows);
-			foreach($row as $value)
+	case  'select':
+		$data = file_get_contents('usuarios.txt');
+		$data = explode("\n", $data);
+		include('views/select.php');		
+	break;
+	
+	case  'insert':
+		if($_POST)
+		{
+			insertUserIntoFile($_POST,$_FILES);
+			header('Location: /users.php');
+		}
+		else 
+			include ('views/form.php');
+	break;
+	
+	case  'update':
+		if($_POST)
+		{
+			updateUserIntoFile($_POST, $_FILES);
+			header('Location: /users.php');
+		}
+		else
+			include ('views/form.php');
+	break;
+		
+	case  'delete':
+		if($_POST)
+		{
+			if($_POST['delete']=='no')
 			{
-				echo "<td>";
-				echo $value;
-				echo "</td>";
+				header('Location: /users.php');
+				exit;
 			}
-		echo "<td>";
-			echo "<a href=\"update.php?pos=".$key."\">Update</a>";
-			echo " | ";
-			echo "<a href=\"delete.php?pos=".$key."\">Delete</a>";	
-		echo "</td>";
-	echo "</tr>";
+			deleteUserIntoFile($_POST);
+			header('Location: /users.php');
+		}
+		else
+			include ('views/form-delete.php');
+	break;
+			
 }
-
-echo "</table>";

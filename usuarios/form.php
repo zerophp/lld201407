@@ -43,7 +43,7 @@
 	<li>
 		Languages: 
 		English <input type="checkbox" name="languages[]" value="en"/>
-		Català <input type="checkbox" name="languages[]" value="ca"/>
+		Catalï¿½ <input type="checkbox" name="languages[]" value="ca"/>
 		Castellano <input type="checkbox" name="languages[]" value="es"/>		
 	</li>	
 	<li>
