@@ -1,44 +1,51 @@
 <?php
 
-// Lectura de configs
-$configs=parse_ini_file('../configs/config.ini');
 
 // Include de librerias
 require_once ('../models/insertUserIntoFile.php');
 require_once ('../models/updateUserIntoFile.php');
 require_once ('../models/deleteUserIntoFile.php');
 
-if(isset($_GET['action']))
-	$action=$_GET['action'];
-else
-	$action = 'select';
 
-switch ($action)
+
+switch ($request['action'])
 {
-	case  'select':
+	case 'index':
+	case 'select':
 		$data = file_get_contents($configs['usersfile']);
 		$data = explode("\n", $data);
-		include('../views/select.php');		
+		ob_start();
+			include('../views/users/select.php');	
+			$content=ob_get_contents();
+		ob_end_clean();	
 	break;
 	
 	case  'insert':
 		if($_POST)
 		{
 			insertUserIntoFile($_POST,$_FILES);
-			header('Location: ?controller=users');
+			header('Location: /users');
 		}
-		else 
-			include ('../views/form.php');
+		else {
+			ob_start();
+			include ('../views/users/form.php');
+			$content=ob_get_contents();
+			ob_end_clean();}
 	break;
 	
 	case  'update':
 		if($_POST)
 		{
 			updateUserIntoFile($_POST, $_FILES);
-			header('Location: ?controller=users');
+			header('Location: /users');
 		}
 		else
-			include ('../views/form.php');
+		{
+			ob_start();
+			include ('../views/users/form.php');
+			$content=ob_get_contents();
+			ob_end_clean();
+		}
 	break;
 		
 	case  'delete':
@@ -46,14 +53,21 @@ switch ($action)
 		{
 			if($_POST['delete']=='no')
 			{
-				header('Location: ?controller=users');
+				header('Location: /users');
 				exit;
 			}
-			deleteUserIntoFile($_POST);
-			header('Location: ?controller=users');
+			deleteUserIntoFile($_POST, $configs['usersfile']);
+			header('Location: /users');
 		}
 		else
-			include ('../views/form-delete.php');
+		{
+			ob_start();
+			include ('../views/users/form-delete.php');
+			$content=ob_get_contents();
+			ob_end_clean();
+		}
 	break;
 			
 }
+
+include('../layouts/dashboard.php');

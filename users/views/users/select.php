@@ -1,5 +1,5 @@
-<a href="?controller=users&action=insert">Insert</a>
-<table border=1>
+<a href="/users/insert">Insert</a>
+<table class="table table-striped">
 	<tr>
 		<th>id</th>
 		<th>name</th>
@@ -22,8 +22,8 @@
 				<td><?=$value;?></td>
 			<?php endforeach; ?>
 				<td>
-				<a href="?controller=users&action=update&pos=<?=$key;?>">Update</a> |  
-				<a href="?controller=users&action=delete&pos=<?=$key;?>">Delete</a>
+				<a href="/users/update/pos/<?=$key;?>">Update</a> |  
+				<a href="/users/delete/pos/<?=$key;?>">Delete</a>
 				</td>
 		</tr>
 	<?php endforeach; ?>		

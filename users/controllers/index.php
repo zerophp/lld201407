@@ -9,3 +9,5 @@ switch ($request['action'])
 	
 			
 }
+
+include('../layouts/dashboard.php');

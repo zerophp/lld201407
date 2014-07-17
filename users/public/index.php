@@ -1,37 +1,23 @@
 <?php
-
-
-$url=explode("/",$_SERVER['REQUEST_URI']);
-
-echo "<pre>";
-print_r($url);
-echo "</pre>";
+require_once '../models/getRequest.php';
+$request=getRequest();
 
 
 
-die;
+// Lectura de configs
+$configs=parse_ini_file('../configs/config.ini');
 
-if(isset($_GET['controller']))
-	$controller=$_GET['controller'];
-else
-	$controller='home';
-
-// Control de error de controller
-
-if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/../controler/'.$controller.'.php'))
-	$controller='error';	
-
-
-switch ($controller)
+switch ($request['controller'])
 {
 	case 'users':
 		echo "esto users";
 		include('../controllers/users.php');
 	break;
-	case 'home':
-		echo "esto es el homepage";
+	case 'index':
+		include('../controllers/index.php');
 	break;
 	case 'error':
 		include('../controllers/error.php');
 	break;
 }
+
