@@ -10,4 +10,4 @@ switch ($request['action'])
 			
 }
 
-include('../layouts/dashboard.php');
+include('../layouts/jumbotron-narrow.php');
