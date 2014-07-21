@@ -45,6 +45,7 @@
 
       <div class="row marketing">
         <div class="col-lg-6">
+         <?php echo $content;?>
           <h4>Subheading</h4>
           <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 

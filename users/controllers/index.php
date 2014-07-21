@@ -2,8 +2,11 @@
 
 switch ($request['action'])
 {
-	case  '404':
-		include('../views/error/404.php');		
+	case  'index':
+		ob_start();
+			include('../views/index/index.php');	
+		$content=ob_get_contents();
+		ob_end_clean();
 	break;
 	
 	
