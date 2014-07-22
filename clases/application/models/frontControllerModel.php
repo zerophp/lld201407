@@ -2,19 +2,14 @@
 
 class FrontControllerModel
 {
-	public static $defaultController = "indexController";
-	public static $defaultAction = "indexAction";
-	public static $errorController = "errorController";
+	public static $defaultController = "index";
+	public static $defaultAction = "index";
+	public static $errorController = "error";
 	
 	
 	public static function getRequest()
 	{
 		$url=explode("/",$_SERVER['REQUEST_URI']);
-		
-		echo "<pre>url";
-		print_r($url);
-		print_r($_SERVER['REQUEST_URI']);
-		echo "</pre>";
 		
 		if(isset($url[1]) && $url[1]=='')
 		{
@@ -22,7 +17,7 @@ class FrontControllerModel
 			$request['action']=self::$defaultAction;
 			return $request;
 		}
-		else if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/../application/controllers/'.$url[1].'.php'))
+		else if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/../application/controllers/'.$url[1].'Controller.php'))
 		{
 			$request['controller']=self::$errorController;
 			$request['action']='error404Action';
@@ -55,7 +50,36 @@ class FrontControllerModel
 	
 	public static function dispatch($request)
 	{
-		$controller = new $request['controller'];
-		$controller->$request['action'](); 			
+		$controller = $request['controller']."Controller";
+		$action = $request['action']."Action";
+		$controller = new $controller();
+		$content = $controller->$action(); 
+		
+		$layout  = $controller->layout;
+
+		include('../application/layouts/'.$layout.'.php');
+		
+		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

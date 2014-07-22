@@ -1,7 +1,7 @@
 <?php
 // Lectura de configs
 $configs=parse_ini_file('../application/configs/config.ini');
-include ('../application/autoload.php');
+include ($configs['autoload']);
 
 session_start();
 

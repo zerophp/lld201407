@@ -1,7 +1,9 @@
 <?php
 
-class UsersController
+class usersController
 {
+	public $content;
+	public $layout = 'dashboard';
 	
 	public function __construct()
 	{
@@ -10,30 +12,31 @@ class UsersController
 		require_once ('../application/models/updateUserIntoFile.php');
 		require_once ('../application/models/deleteUserIntoFile.php');
 		
+		
 		// Control de autenticacion
 		
-		if(isset($_SESSION['user']['iduser'])&&$_SESSION['user']['iduser']="")
-		{
+// 		if(isset($_SESSION['user']['iduser'])&&$_SESSION['user']['iduser']="")
+// 		{
 		
-		}
-		else
-			header('Location: /author/login');
+// 		}
+// 		else
+// 			header('Location: /author/login');
 		
 
-		include('../layouts/dashboard.php');
 	}
+
 	
 	public function indexAction()
 	{
-		
+		header('Location: /users/select');
 	}
 	
 	public function selectAction()
 	{
-		$data = file_get_contents($configs['usersfile']);
+// 		$data = file_get_contents($configs['usersfile']);
 		
 		// Conectarse al Motor
-		$link = mysqli_connect("localhost","root","");
+		$link = mysqli_connect("localhost","root","1234");
 		
 		// Conectarse a la DB
 		mysqli_select_db($link, 'lld201407');
@@ -53,9 +56,11 @@ class UsersController
 		
 		
 		ob_start();
-		include('../views/usersdb/select.php');
-		$content=ob_get_contents();
+		include('../application/views/usersdb/select.php');
+		$this->content=ob_get_contents();
 		ob_end_clean();
+		
+		return $this->content;
 	}
 	
 	public function insertAction()
@@ -66,7 +71,7 @@ class UsersController
 				
 				
 			// Conectarse al Motor
-			$link = mysqli_connect("localhost","root","");
+			$link = mysqli_connect("localhost","root","1234");
 				
 			// Conectarse a la DB
 			mysqli_select_db($link, 'lld201407');
@@ -103,6 +108,7 @@ class UsersController
 			$content=ob_get_contents();
 			ob_end_clean();
 		}
+		return $this->content;
 	}
 	
 	public function updateAction()
@@ -112,7 +118,7 @@ class UsersController
 			updateUserIntoFile($_POST, $_FILES);
 				
 			// Conectarse al Motor
-			$link = mysqli_connect("localhost","root","");
+			$link = mysqli_connect("localhost","root","1234");
 		
 			// Conectarse a la DB
 			mysqli_select_db($link, 'lld201407');
@@ -152,6 +158,7 @@ class UsersController
 			$content=ob_get_contents();
 			ob_end_clean();
 		}
+		return $this->content;
 	}
 	
 	public function deleteAction()
@@ -168,7 +175,7 @@ class UsersController
 			updateUserIntoFile($_POST, $_FILES);
 		
 			// Conectarse al Motor
-			$link = mysqli_connect("localhost","root","");
+			$link = mysqli_connect("localhost","root","1234");
 				
 			// Conectarse a la DB
 			mysqli_select_db($link, 'lld201407');
@@ -201,6 +208,7 @@ class UsersController
 			$content=ob_get_contents();
 			ob_end_clean();
 		}
+		return $this->content;
 	}
 }
 
