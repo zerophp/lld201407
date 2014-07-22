@@ -1,6 +1,6 @@
 <?php
 
-class usersController
+class usersController extends users
 {
 	public $content;
 	public $layout = 'dashboard';
