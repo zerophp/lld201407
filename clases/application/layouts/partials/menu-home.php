@@ -4,4 +4,4 @@
 <li><a href="#">Contact</a></li>
 <li><a href="/users">Admin</a></li>
 </ul>
-<h3 class="text-muted">Project name</h3>
+<h3 class="text-muted">Clases</h3>
