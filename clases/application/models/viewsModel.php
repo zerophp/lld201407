@@ -3,7 +3,7 @@
 
 class viewsModel
 {
-	static public function renderView($data)
+	static public function renderView($data=null)
 	{
 		ob_start();
 		include('../application/views/'.FrontControllerModel::$controller.'/'.FrontControllerModel::$action.'.php');

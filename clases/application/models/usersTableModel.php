@@ -24,32 +24,57 @@ class usersTableModel extends MySQLAbstractModel implements tableUsersInterfaceM
 
 	public function getUser($id)
 	{
+		$user=array();
+		// Query
+		$query = "SELECT * FROM users WHERE iduser=".$id;
+		if ($result = $this->query($this->link, $query))
+			while($row = $this->getAssoc($result))
+				$user[]=$row;
 		
+		return $user[0];
 	}
 
 	public function insertUser($data)
-	{
-		$city=array('BCN'=>1);
-		$gender=array('m'=>1,'h'=>2,'o'=>3);
+	{			
+		$city=array('LLD'=>1, 'BCN'=>2, 'GRN'=>3);
 		$query="INSERT INTO users SET
-					name='".$_POST['name']."',
-					email='".$_POST['email']."',
-					password='".$_POST['password']."',
-					description='".$_POST['description']."',
-					photo='".$_FILES['photo']['name']."',
-					cities_idcity=".$city[$_POST['city']].",
-					gender=".$gender[$_POST['gender']].",
-					genders_idgender=".$gender[$_POST['gender']]."";
+					name='".$data['name']."',
+					email='".$data['email']."',
+					password='".$data['password']."',
+					description='".$data['description']."',
+					photo='".$data['filename']."',
+					cities_idcity=".$city[$data['city']].",
+					genders_idgender=".$data['gender']."";
+
+		$this->query($this->link, $query);
+		
+		return mysqli_insert_id($this->link);
 	}
 
 	public function updateUser($id, $data)
 	{
+		$city=array('LLD'=>1, 'BCN'=>2, 'GRN'=>3);
+		$query="UPDATE users SET
+					name='".$data['name']."',
+					email='".$data['email']."',
+					password='".$data['password']."',
+					description='".$data['description']."',
+					photo='".$data['filename']."',
+					cities_idcity=".$city[$data['city']].",
+					genders_idgender=".$data['gender']." 
+					WHERE iduser=".$id;		
+		$this->query($this->link, $query);
 		
+		return $data['iduser'];
 	}
 
 	public function deleteUser($id)
-	{
+	{	
+		$query="DELETE FROM users
+					WHERE iduser=".$id;
+		$this->query($this->link, $query);
 		
+		return true;
 	}
 
 	

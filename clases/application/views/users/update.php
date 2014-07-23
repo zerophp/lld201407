@@ -1,19 +1,11 @@
 <?php 
-// Includes
-require_once('../models/getUserFromDB.php');
-
-
-
-$user=getuserFromDB($request['params']['iduser']);
-echo "<pre>";
-print_r($user);
-echo "</pre>";	
+$user=$data;	
 ?>
 
 <form method="POST" enctype="multipart/form-data">
 <ul>
 	<li>
-		id: <input type="hidden" name="iduser" value="<?=(isset($request['params']['iduser']))?$request['params']['iduser']:'';?>"/>
+		id: <input type="hidden" name="iduser" value="<?=(isset($user['iduser']))?$user['iduser']:'';?>"/>
 	</li>
 	<li>
 		Nombre: <input type="text" name="name" value="<?=(isset($user['name']))?$user['name']:'';?>"/>

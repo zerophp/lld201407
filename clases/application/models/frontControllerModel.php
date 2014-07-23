@@ -7,6 +7,7 @@ class FrontControllerModel
 	public static $errorController = "error";
 	public static $controller;
 	public static $action;
+	public static $params;
 	
 	public static function getRequest()
 	{
@@ -48,6 +49,7 @@ class FrontControllerModel
 		}	
 		self::$controller=$request['controller'];
 		self::$action=$request['action'];
+		self::$params=$request['params'];
 		
 		return $request;
 	}
