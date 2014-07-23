@@ -1,6 +1,6 @@
 <?php
 
-class usersController extends users
+class usersController
 {
 	public $content;
 	public $layout = 'dashboard';
@@ -33,34 +33,9 @@ class usersController extends users
 	
 	public function selectAction()
 	{
-// 		$data = file_get_contents($configs['usersfile']);
-		
-		// Conectarse al Motor
-		$link = mysqli_connect("localhost","root","1234");
-		
-		// Conectarse a la DB
-		mysqli_select_db($link, 'lld201407');
-		
-		$data=array();
-		// Query
-		$query = "SELECT * FROM users";
-		if ($result = mysqli_query($link, $query))
-		{
-			while($row = $result->fetch_assoc())
-			{
-				//echo $row['name'].": ".$row['email']."<br/>";
-				$data[]=$row;
-			}
-		}
-		
-		
-		
-		ob_start();
-		include('../application/views/usersdb/select.php');
-		$this->content=ob_get_contents();
-		ob_end_clean();
-		
-		return $this->content;
+		$model = new usersTableModel();
+		$data = $model->getUsers();
+		$this->content = viewsModel::renderView($data);	
 	}
 	
 	public function insertAction()
@@ -154,7 +129,7 @@ class usersController extends users
 		else
 		{
 			ob_start();
-			include ('../views/usersdb/form.php');
+			include ('../views/users/form.php');
 			$content=ob_get_contents();
 			ob_end_clean();
 		}
@@ -204,7 +179,7 @@ class usersController extends users
 		else
 		{
 			ob_start();
-			include ('../views/usersdb/form-delete.php');
+			include ('../views/users/form-delete.php');
 			$content=ob_get_contents();
 			ob_end_clean();
 		}

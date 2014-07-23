@@ -1,63 +1,66 @@
 <?php 
 // Includes
-require_once('../models/getUserFromFile.php');
+require_once('../models/getUserFromDB.php');
 
-if(isset($_GET['pos']))
-	$user = getuserFromFile($_GET['pos'],$configs['usersfile']);
 
+
+$user=getuserFromDB($request['params']['iduser']);
+echo "<pre>";
+print_r($user);
+echo "</pre>";	
 ?>
 
 <form method="POST" enctype="multipart/form-data">
 <ul>
 	<li>
-		id: <input type="hidden" name="id" value="<?=(isset($_GET['pos']))?$_GET['pos']:'';?>"/>
+		id: <input type="hidden" name="iduser" value="<?=(isset($request['params']['iduser']))?$request['params']['iduser']:'';?>"/>
 	</li>
 	<li>
-		Nombre: <input type="text" name="name" value="<?=(isset($user[1]))?$user[1]:'';?>"/>
+		Nombre: <input type="text" name="name" value="<?=(isset($user['name']))?$user['name']:'';?>"/>
 	</li>
 	<li>
-		Email: <input type="text" name="email" value="<?=(isset($user[2]))?$user[2]:'';?>"/>
+		Email: <input type="text" name="email" value="<?=(isset($user['email']))?$user['email']:'';?>"/>
 	</li>
 	<li>
 		Password: <input type="password" name="password"/>
 	</li>
 	<li>
-		Description: <textarea name="description"><?=(isset($user[4]))?$user[4]:'';?></textarea>		
+		Description: <textarea name="description"><?=(isset($user['description']))?$user['description']:'';?></textarea>		
 	</li>
 	<li>
 		Photo: <input type="file" name="photo"/>
-		<?php if(isset($user[10])):?>
-		<img src="uploads/<?=$user[10];?>" width="100px"/>
+		<?php if(isset($user['photo'])&&$user['photo']!=''):?>
+		<img src="uploads/<?=$user['photo'];?>" width="100px"/>
 		<?php endif;?>
 		
 	</li>
 	<li>
 		City: 
 		<select name="city">
-			<option value="LLD" <?php if(isset($user[5])&&$user[5]=="LLD") echo "selected";?>>Lleida</option>
-			<option value="BCN" <?php if(isset($user[5])&&$user[5]=="BCN") echo "selected";?>>Barcelona</option>
-			<option value="GRN" <?=(isset($user[5])&&$user[5]=="GRN")?"selected":'';?>>Girona</option>
+			<option value="LLD" <?php if(isset($user['cities_idcity'])&&$user['cities_idcity']=="LLD") echo "selected";?>>Lleida</option>
+			<option value="BCN" <?php if(isset($user['cities_idcity'])&&$user['cities_idcity']=="BCN") echo "selected";?>>Barcelona</option>
+			<option value="GRN" <?=(isset($user['cities_idcity'])&&$user['cities_idcity']=="GRN")?"selected":'';?>>Girona</option>
 		</select>
 	</li>
 	<li>
 		Gender: 
-		Otros <input type="radio" name="gender" value="o" <?=(isset($user[6])&&$user[6]=="o")?"checked":'';?>/>
-		Mujer <input type="radio" name="gender" value="m" <?=(isset($user[6])&&$user[6]=="m")?"checked":'';?>/>
-		Hombre <input type="radio" name="gender" value="h" <?=(isset($user[6])&&$user[6]=="h")?"checked":'';?>/>
+		Otros <input type="radio" name="gender" value="1" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="o")?"checked":'';?>/>
+		Mujer <input type="radio" name="gender" value="2" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="m")?"checked":'';?>/>
+		Hombre <input type="radio" name="gender" value="3" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="h")?"checked":'';?>/>
 	</li>
 	<li>
 		Pets: 
 		<select multiple name="pets[]">
-			<option value="Dog" <?=(isset($user[7])&&in_array('Dog',$user[7]))?"selected":'';?>>Perro</option>
-			<option value="Tiger" <?=(isset($user[7])&&in_array('Tiger',$user[7]))?"selected":'';?>>Tigre</option>
-			<option value="Cat" <?=(isset($user[7])&&in_array('Cat',$user[7]))?"selected":'';?>>Gato</option>
+			<option value="Dog" <?=(isset($user['name'])&&in_array('Dog',$user['name']))?"selected":'';?>>Perro</option>
+			<option value="Tiger" <?=(isset($user['name'])&&in_array('Tiger',$user['name']))?"selected":'';?>>Tigre</option>
+			<option value="Cat" <?=(isset($user['name'])&&in_array('Cat',$user['name']))?"selected":'';?>>Gato</option>
 		</select>
 	</li>
 	<li>
 		Languages: 
-		English <input type="checkbox" name="languages[]" value="en" <?=(isset($user[8])&&in_array('en',$user[8]))?"checked":'';?>/>
-		Catal� <input type="checkbox" name="languages[]" value="ca" <?=(isset($user[8])&&in_array('ca',$user[8]))?"checked":'';?>/>
-		Castellano <input type="checkbox" name="languages[]" value="es" <?=(isset($user[8])&&in_array('es',$user[8]))?"checked":'';?>/>		
+		English <input type="checkbox" name="languages[]" value="en" <?=(isset($user['name'])&&in_array('en',$user['name']))?"checked":'';?>/>
+		Catal� <input type="checkbox" name="languages[]" value="ca" <?=(isset($user['name'])&&in_array('ca',$user['name']))?"checked":'';?>/>
+		Castellano <input type="checkbox" name="languages[]" value="es" <?=(isset($user['name'])&&in_array('es',$user['name']))?"checked":'';?>/>		
 	</li>	
 	<li>
 		Enviar: <input type="submit" name="enviar" value="Enviar"/>

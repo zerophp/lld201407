@@ -1,4 +1,4 @@
-<a href="/users/insert">Insert</a>
+<a href="/usersdb/insert">Insert</a>
 <table class="table table-striped">
 	<tr>
 		<th>id</th>
@@ -17,13 +17,13 @@
 	<?php foreach ($data as $key => $rows):?>		
 		<tr>
 		<?php 
-			$row=explode('|',$rows);
-			foreach($row as $value):?>
+		
+			foreach($rows as $value):?>
 				<td><?=$value;?></td>
 			<?php endforeach; ?>
 				<td>
-				<a href="/users/update/pos/<?=$key;?>">Update</a> |  
-				<a href="/users/delete/pos/<?=$key;?>">Delete</a>
+				<a href="/usersdb/update/iduser/<?=$rows['iduser'];?>">Update</a> |  
+				<a href="/usersdb/delete/iduser/<?=$rows['iduser'];?>">Delete</a>
 				</td>
 		</tr>
 	<?php endforeach; ?>		

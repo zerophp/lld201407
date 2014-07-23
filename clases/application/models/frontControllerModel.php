@@ -5,7 +5,8 @@ class FrontControllerModel
 	public static $defaultController = "index";
 	public static $defaultAction = "index";
 	public static $errorController = "error";
-	
+	public static $controller;
+	public static $action;
 	
 	public static function getRequest()
 	{
@@ -44,7 +45,10 @@ class FrontControllerModel
 				}
 				$request['params']=$params;			
 			}
-		}		
+		}	
+		self::$controller=$request['controller'];
+		self::$action=$request['action'];
+		
 		return $request;
 	}
 	
@@ -52,11 +56,13 @@ class FrontControllerModel
 	{
 		$controller = $request['controller']."Controller";
 		$action = $request['action']."Action";
+		
 		$controller = new $controller();
-		$content = $controller->$action(); 
+		$controller->$action(); 
 		
 		$layout  = $controller->layout;
-
+		$content = $controller->content;
+		
 		include('../application/layouts/'.$layout.'.php');
 		
 		
