@@ -12,11 +12,10 @@
 
 
 // Generar el Controller author 
-1. swith sobre request[action]
-2. un case para cada accion
-3. cada accion tiene una view
-4. cada controller tiene una carpeta en las views
-5. agregar el controller a index.php_ini_loaded_file()
+1. Class nameController
+2. Las acciones son metodos asi: nameAction
+3. cada controller tiene una carpeta en las views
+4. cada accion tiene una view, que se llama igual que la action
 
 // PAra hacer la autenticacion
 1. Generar la acccion author/login

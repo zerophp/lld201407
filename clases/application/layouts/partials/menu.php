@@ -7,6 +7,6 @@
             <li class="active"><a href="#">Overview</a></li>
             <li><a href="/users">Users</a></li>
             <li><a href="/index">Home</a></li>
-            <li><a href="#">Export</a></li>
+            <li><a href="/author/logout">Logout</a></li>
           </ul>
          

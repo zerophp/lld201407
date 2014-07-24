@@ -6,23 +6,10 @@ class usersController
 	public $layout = 'dashboard';
 	
 	public function __construct()
-	{
-		// Include de librerias
-		require_once ('../application/models/insertUserIntoFile.php');
-		require_once ('../application/models/updateUserIntoFile.php');
-		require_once ('../application/models/deleteUserIntoFile.php');
-		
-		
-		// Control de autenticacion
-		
-// 		if(isset($_SESSION['user']['iduser'])&&$_SESSION['user']['iduser']="")
-// 		{
-		
-// 		}
-// 		else
-// 			header('Location: /author/login');
-		
-
+	{			
+		// Control de autenticacion		
+		if(!isset($_SESSION['user']['iduser']) or $_SESSION['user']['iduser']="")
+			header('Location: /author/login');
 	}
 
 	
@@ -78,7 +65,18 @@ class usersController
 				exit;
 			}
 			$model = new usersTableModel();
-			$userid = $model->deleteUser(FrontControllerModel::$params['iduser']);
+			
+			try {
+				$userid = $model->deleteUser(FrontControllerModel::$params['iduser']);
+				if ($userid == FALSE)
+					throw new Exception("Query not executed");
+			
+			}
+			catch (Exception $e)
+			{
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+			}
+			
 			header('Location: /users');
 		}
 		else

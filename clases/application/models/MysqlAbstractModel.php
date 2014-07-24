@@ -10,9 +10,26 @@ abstract class MySQLAbstractModel
 	 * @return resource database link
 	 */
 	public function connectEngine($host,$user,$password)
-	{
-		$link = mysqli_connect($host,$user,$password);
-		return $link;
+	{	
+		$link = null;
+		try 
+		{
+			$link = mysqli_connect($host,$user,$password);
+			
+// 			echo "<pre>";
+// 			print_r($link);
+// 			echo "</pre>";
+// 			die;
+			if (!is_object($link))
+				throw new Exception("Error de cnx");
+			return $link;
+		}
+		catch (Exception $e)
+		{
+			echo 'Caught exception: ',  $e->getMessage(), "\n";
+		}
+		
+		
 	}
 	
 	public function connectDB($link, $db)

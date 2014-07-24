@@ -1,13 +1,17 @@
 <?php
 class errorController
 {
+	
+	public $content;
+	public $layout = 'error';
+	
 	public function indexAction()
 	{
-		include('../application/views/error/index.php');
+		$this->content = viewsModel::renderView();
 	}
 	
 	public function error404Action()
 	{
-		include('../application/views/error/404.php');
+		$this->content = viewsModel::renderView();
 	}
 }

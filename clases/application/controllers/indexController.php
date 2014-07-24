@@ -1,16 +1,12 @@
 <?php
 
-switch ($request['action'])
+class indexController
 {
-	case  'index':
-		ob_start();
-			include('../application/views/index/index.php');	
-		$content=ob_get_contents();
-		ob_end_clean();
-	break;
-	
-	
-			
-}
+	public $content;
+	public $layout = 'jumbotron-narrow';
 
-include('../application/layouts/jumbotron-narrow.php');
+	public function indexAction()
+	{
+		
+	}	
+}

@@ -36,14 +36,14 @@ $user=$data;
 	</li>
 	<li>
 		Gender: 
-		Otros <input type="radio" name="gender" value="1" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="o")?"checked":'';?>/>
-		Mujer <input type="radio" name="gender" value="2" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="m")?"checked":'';?>/>
-		Hombre <input type="radio" name="gender" value="3" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="h")?"checked":'';?>/>
+		Otros <input type="radio" name="gender" value="1" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="1")?"checked":'';?>/>
+		Mujer <input type="radio" name="gender" value="2" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="2")?"checked":'';?>/>
+		Hombre <input type="radio" name="gender" value="3" <?=(isset($user['genders_idgender'])&&$user['genders_idgender']=="3")?"checked":'';?>/>
 	</li>
 	<li>
 		Pets: 
 		<select multiple name="pets[]">
-			<option value="Dog" <?=(isset($user['name'])&&in_array('Dog',$user['name']))?"selected":'';?>>Perro</option>
+			<option value="Dog" <?=(isset($user['name'])&&in_array('Dog',$user['pet']))?"selected":'';?>>Perro</option>
 			<option value="Tiger" <?=(isset($user['name'])&&in_array('Tiger',$user['name']))?"selected":'';?>>Tigre</option>
 			<option value="Cat" <?=(isset($user['name'])&&in_array('Cat',$user['name']))?"selected":'';?>>Gato</option>
 		</select>

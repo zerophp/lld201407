@@ -69,12 +69,26 @@ class usersTableModel extends MySQLAbstractModel implements tableUsersInterfaceM
 	}
 
 	public function deleteUser($id)
-	{	
+	{	  
+		 
 		$query="DELETE FROM users
-					WHERE iduser=".$id;
+				WHERE iduser=".$id; 
 		$this->query($this->link, $query);
 		
 		return true;
+	}
+	
+	public function getUserLogin($email, $password)
+	{
+		$user=array();
+		// Query
+		$password=hash("sha256", $password);
+		$query = "SELECT iduser, name, email FROM users WHERE email='".$email."' AND password='".$password."'";
+		if ($result = $this->query($this->link, $query))
+			while($row = $this->getAssoc($result))
+				$user[]=$row;
+		
+			return $user[0];
 	}
 
 	

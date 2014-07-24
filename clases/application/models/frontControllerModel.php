@@ -22,7 +22,7 @@ class FrontControllerModel
 		else if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/../application/controllers/'.$url[1].'Controller.php'))
 		{
 			$request['controller']=self::$errorController;
-			$request['action']='error404Action';
+			$request['action']='error404';
 			return $request;
 		}
 		else
